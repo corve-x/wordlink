@@ -6,6 +6,14 @@ Wordlink is a browser puzzle where the answer to one clue becomes clue for the n
 > <br>
 > Reads pair as: Black ice, ice cream, cream cheese, cheese ball, ball park
 
+## Updated race feature (1v1 online)
+
+- The 1v1 race now uses the same letter tiles as solo play, no login required.
+- Three hints per player, per race. Reveal a letter after 10 seconds on the current word, or reveal the whole word after 20 seconds. Either option costs one hint. Using hint only affects your board.
+- Live updation of words solved by either player on both sides.
+- When either of the players solve the whole sequence, the game stops and ends. Star again
+- Redis free db is being used for the 1v1 duels.
+
 ## Tech Stack
 
 - HTML, CSS, JS

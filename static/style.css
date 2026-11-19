@@ -373,3 +373,9 @@ dialog hr {
     animation: none;
   }
 }
+
+header a.ghost,
+header a[href="/static/duel.html"] {
+  text-decoration: none;
+  align-self: center;
+}

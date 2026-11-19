@@ -14,7 +14,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from . import puzzles
+from . import puzzles, rooms
 
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = os.environ.get("WORDLINK_DB", str(ROOT / "wordlink.db"))
@@ -65,6 +65,7 @@ def tx():
 
 init_db()
 app = FastAPI(title="Wordlink")
+app.include_router(rooms.router) # newly added for pvt rooms
 
 def player(x_player_id: str = Header(...)) -> str:
   if not re.fullmatch(r"[A-Za-z0-9_-]{8,64}", x_player_id):

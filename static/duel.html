@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>1v1 · Wordlink</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+      [hidden] {
+        display: none !important;
+      }
+      a {
+        color: var(--accent);
+      }
+      main {
+        padding-bottom: 2rem;
+      }
+      section,
+      form {
+        display: grid;
+        gap: 0.75rem;
+      }
+      h2,
+      p {
+        margin: 0.5rem 0;
+      }
+      input {
+        width: 100%;
+        padding: 0.7rem;
+        background: var(--bg);
+        color: var(--fg);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font: inherit;
+      }
+      #code,
+      #guess {
+        text-transform: uppercase;
+      }
+      #room-code {
+        letter-spacing: 0.14em;
+      }
+      #players {
+        padding: 0;
+        list-style: none;
+      }
+      #players li {
+        border-bottom: 1px solid var(--line);
+        padding: 0.5rem 0;
+        overflow-wrap: anywhere;
+      }
+      #players {
+        display: flex;
+        gap: 0.75rem;
+        margin: 0.25rem 0;
+      }
+      #players li {
+        flex: 1;
+        border: 1px solid var(--line);
+        background: var(--fixed);
+        border-radius: 10px;
+        padding: 0.5rem;
+      }
+      #rows {
+        --slot: min(2.4rem, calc((100vw - 6.5rem) / 9));
+      }
+      #rows input.slot {
+        text-align: center;
+        padding: 0;
+        color: var(--fg);
+        font: inherit;
+        font-weight: 700;
+        border-radius: 7px;
+      }
+      #rows input.slot:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 0;
+      }
+      #budget {
+        text-align: center;
+        color: var(--muted);
+      }
+      #leave {
+        justify-self: center;
+      }
+    </style>
+    <script defer src="/static/duel.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Wordlink</h1>
+      <a class="ghost" href="/">Solo play</a>
+    </header>
+    <main>
+      <h2>1v1 race</h2>
+      <section id="lobby">
+        <p>
+          Race a friend on the same chain. First to solve all five links wins.
+          Each player gets three hints.
+        </p>
+        <form id="setup">
+          <label for="name">Display name</label
+          ><input id="name" maxlength="24" required autocomplete="nickname" />
+          <button class="primary" value="create">Create room</button>
+          <label for="code">Have a room code?</label
+          ><input
+            id="code"
+            maxlength="6"
+            autocomplete="off"
+            placeholder="Room code"
+          />
+          <button class="quiet" value="join">Join room</button>
+        </form>
+      </section>
+      <section id="match" hidden>
+        <h3>Room <span id="room-code"></span></h3>
+        <p id="headline" role="status"></p>
+        <ul id="players"></ul>
+        <button id="ready" class="primary">Ready</button>
+        <section id="answer" hidden>
+          <ol id="rows" aria-label="Word chain"></ol>
+          <p id="budget"></p>
+          <div class="hints">
+            <button type="button" id="letter" class="quiet">
+              Reveal a letter
+            </button>
+            <button type="button" id="word" class="quiet">Reveal word</button>
+          </div>
+        </section>
+        <button id="rematch" type="button" class="primary" hidden>
+          Play again
+        </button>
+        <button id="leave" class="quiet">Leave room</button>
+      </section>
+      <p id="notice" role="status"></p>
+    </main>
+  </body>
+</html>
