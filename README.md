@@ -32,10 +32,6 @@ SQLite locally stores: Daily puzzles, game progress, game history.
 - Game progress - Tracks each player’s round using an anonymous player ID. When a player returns using the same browser, Wordlink can restore the board where they left off.
 - Game history - Keeps a record of each player’s 10 most recently completed rounds with game mode, completed chain, time taken, hints used.
 
-## Notes
-
-The tests/ folder contains AI-generated tests for checking Wordlink’s gameplay during development. The folder is optional and can be omitted when running or deploying the website.
-
 ## Deployment
 
 deployed on vercel: https://wordlink-sigma.vercel.app/
