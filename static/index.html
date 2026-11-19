@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Wordlink</title>
+    <script>
+      try {
+        var t =
+          localStorage.getItem("wl-theme") ||
+          (window.matchMedia &&
+          matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Wordlink</h1>
+      <nav aria-label="Main">
+        <button
+          id="theme"
+          class="ghost icon"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <svg
+            class="moon"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"
+            />
+          </svg>
+          <svg
+            class="sun"
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4.2" fill="currentColor" />
+            <path
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M5.3 18.7L7 17M17 7l1.7-1.7"
+            />
+          </svg>
+        </button>
+        <button id="open-history" class="ghost" type="button">History</button>
+        <button id="open-about" class="ghost" type="button">About</button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="bar">
+        <div class="tabs" role="group" aria-label="Mode">
+          <button type="button" data-mode="daily" aria-pressed="true">
+            Daily
+          </button>
+          <button type="button" data-mode="free" aria-pressed="false">
+            Free play
+          </button>
+        </div>
+        <div id="timer" class="timer" role="timer" aria-label="Elapsed time">
+          00:00
+        </div>
+      </div>
+
+      <section id="board" class="board" aria-label="Word chain">
+        <ol id="rows"></ol>
+        <input
+          id="entry"
+          type="text"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          enterkeyhint="go"
+          aria-label="Type the missing letters"
+        />
+      </section>
+
+      <p id="msg" class="msg" role="status" aria-live="polite"></p>
+
+      <div id="hints" class="hints">
+        <button id="hint-letter" type="button" class="quiet">
+          Reveal a letter
+        </button>
+        <button id="hint-word" type="button" class="quiet">Reveal word</button>
+        <button id="replace-chain" type="button" class="quiet" hidden>
+          Start new chain
+        </button>
+      </div>
+
+      <div id="after" class="after" hidden>
+        <p id="summary"></p>
+        <button id="new-chain" type="button" class="primary" hidden>
+          New chain
+        </button>
+      </div>
+    </main>
+
+    <dialog id="about" aria-labelledby="about-title">
+      <div class="dlg-head">
+        <h2 id="about-title">How to play</h2>
+        <button class="ghost" data-close type="button">Close</button>
+      </div>
+      <p>
+        Every chain has six words. Each word joins the one before it to make a
+        familiar phrase or compound word.
+      </p>
+      <p class="eg"><b>BLACK</b> → <b>ICE</b> → <b>CREAM</b></p>
+      <p>
+        Black ice, ice cream. You get the first letter and the length; type the
+        rest and the word locks in.
+      </p>
+      <p>
+        The clock starts with your first letter. Hints unlock after 15 seconds
+        for a letter and 60 for the whole word.
+      </p>
+      <hr />
+      <p class="credit">Built by Satya</p>
+      <p class="credit">
+        <a
+          href="https://github.com/corve-x"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
+      </p>
+    </dialog>
+
+    <dialog id="history" aria-labelledby="history-title">
+      <div class="dlg-head">
+        <h2 id="history-title">History</h2>
+        <button class="ghost" data-close type="button">Close</button>
+      </div>
+      <ol id="hist-list" class="hist"></ol>
+    </dialog>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
