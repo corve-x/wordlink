@@ -35,3 +35,7 @@ SQLite locally stores: Daily puzzles, game progress, game history.
 ## Notes
 
 The tests/ folder contains AI-generated tests for checking Wordlink’s gameplay during development. The folder is optional and can be omitted when running or deploying the website.
+
+## Deployment
+
+deployed on vercel: https://wordlink-sigma.vercel.app/
