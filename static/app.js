@@ -161,19 +161,26 @@
     }
     $("#hints").hidden = !active();
     $("#replace-chain").hidden = game.mode !== "free" || !active();
-    $("#replace-chain").addEventListener("click", async (event) => {
-      if (busy || mode !== "free" || game.mode !== "free" || !active()) return;
+    const restartDialog = $("#restart-dialog");
+    const replaceButton = $("#replace-chain");
 
-      const confirmed = window.confirm(
-        "Start a new chain? Your progress on this chain will be lost.",
-      );
-      if (!confirmed) return;
+    replaceButton.addEventListener("click", async () => {
+      if (busy || mode !== "free" || game?.mode !== "free" || !active()) return;
 
-      const button = event.currentTarget;
       const previousId = game.id;
       const draftKey = dkey();
-      button.disabled = true;
 
+      // Reset the previous choice so Escape always means "keep playing".
+      restartDialog.returnValue = "cancel";
+      restartDialog.showModal();
+      await new Promise((resolve) => {
+        restartDialog.addEventListener("close", resolve, { once: true });
+      });
+
+      if (restartDialog.returnValue !== "restart") return;
+      if (mode !== "free" || game.id !== previousId || !active()) return;
+
+      replaceButton.disabled = true;
       try {
         const result = await api(
           "/free/new?replace_id=" + encodeURIComponent(previousId),
@@ -181,7 +188,6 @@
         );
 
         delete drafts[draftKey];
-
         if (mode === "free" && game.id === previousId) {
           setGame(result.game);
           flash("");
@@ -190,9 +196,10 @@
       } catch {
         flash("Could not load a new chain. Try again.");
       } finally {
-        button.disabled = false;
+        replaceButton.disabled = false;
       }
     });
+
     const done = !active();
     $("#after").hidden = !done;
     if (done) {
