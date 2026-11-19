@@ -170,7 +170,7 @@
       const previousId = game.id;
       const draftKey = dkey();
 
-      // Reset the previous choice so Escape always means "keep playing".
+      // reset the previous choice
       restartDialog.returnValue = "cancel";
       restartDialog.showModal();
       await new Promise((resolve) => {
