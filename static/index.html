@@ -110,6 +110,19 @@
       </div>
     </main>
 
+    <dialog id="restart-dialog" aria-labelledby="restart-title">
+      <h2 id="restart-title">Start a new chain?</h2>
+      <p>Your progress on this chain will be lost.</p>
+
+      <form method="dialog">
+        <button type="submit" value="cancel" class="quiet" autofocus>
+          Keep playing
+        </button>
+        <button type="submit" value="restart" class="primary">
+          Start new chain
+        </button>
+      </form>
+    </dialog>
     <dialog id="about" aria-labelledby="about-title">
       <div class="dlg-head">
         <h2 id="about-title">How to play</h2>
@@ -121,12 +134,8 @@
       </p>
       <p class="eg"><b>BLACK</b> → <b>ICE</b> → <b>CREAM</b></p>
       <p>
-        Black ice, ice cream. You get the first letter and the length; type the
-        rest and the word locks in.
-      </p>
-      <p>
-        The clock starts with your first letter. Hints unlock after 15 seconds
-        for a letter and 60 for the whole word.
+        The clock starts with your first letter. Hints unlock after 10 seconds
+        for a letter and 30 for the whole word.
       </p>
       <hr />
       <p class="credit">Built by Satya</p>
