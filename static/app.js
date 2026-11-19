@@ -145,8 +145,8 @@
         "aria-label",
         `Word ${index + 1} of 6, ${length} letters, starts with ${fixed[0]}. Type the missing letters.`,
       );
-      placeEntry();
       paint();
+      placeEntry();
       if (
         !store.focusedOnce &&
         window.matchMedia &&
