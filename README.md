@@ -20,7 +20,7 @@ Wordlink is a browser puzzle where the answer to one clue becomes clue for the n
 
 ## Where the words come from
 
-The default bank in [data/word_pairs.txt](./data/word_pairs.txt) contains **644 unique ordered pairs** using **387 distinct words**. Together they allow **17,001 six-word chains**. (updated manually)
+The default bank in [data/word_pairs.txt](./data/word_pairs.txt) contains **978 unique ordered pairs** using **329 distinct words**. Together they allow **44,573 six-word chains**. (updated manually)
 
 Unique word pairs chosen at random from the and text file for daily puzzle.
 
