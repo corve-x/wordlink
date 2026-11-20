@@ -2,7 +2,7 @@
 
 Wordlink is a browser puzzle where the answer to one clue becomes clue for the next. You start with a word initally, then uncover the next word, with only the first letter being seen. Each neighbouring word pairs form familiar phase or a compound word.
 
-> ex: **BLACK → ICE → CREAM → CHEESE → BALL → PARK**
+> ex: **BLACK -> ICE -> CREAM -> CHEESE -> BALL -> PARK**
 > <br>
 > Reads pair as: Black ice, ice cream, cream cheese, cheese ball, ball park
 
@@ -18,7 +18,7 @@ Wordlink is a browser puzzle where the answer to one clue becomes clue for the n
 
 - HTML, CSS, JS
 - Python, FastAPI
-- SQLite
+- SQLite, Redis
 
 ### Requirements
 
@@ -34,11 +34,17 @@ Unique word pairs chosen at random from the and text file for daily puzzle.
 
 ### What gets saved
 
-SQLite locally stores: Daily puzzles, game progress, game history.
+#### - SQLite locally stores: Daily puzzles, game progress, game history (only for solo and daily puzzles)
 
 - Daily puzzles - Stores the six-word chain for each date so everyone who plays Daily mode that day gets the same puzzle.
 - Game progress - Tracks each player’s round using an anonymous player ID. When a player returns using the same browser, Wordlink can restore the board where they left off.
 - Game history - Keeps a record of each player’s 10 most recently completed rounds with game mode, completed chain, time taken, hints used.
+
+#### - Redis is used for online 1v1 race mode
+
+- Keeps both player in sync in a private room.
+- If both players click Play again, the backend uses a Redis transaction to record both votes and start exactly one new round.
+- Each room expires after 90 seconds, so abandoned rooms clear themselves automatically.
 
 ## Deployment
 
