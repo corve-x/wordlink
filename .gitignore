@@ -5,3 +5,4 @@ __pycache__/
 *.db-shm
 tests/e2e/node_modules/
 /tests/
+requirements-dev.txt
